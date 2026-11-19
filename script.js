@@ -90,15 +90,16 @@
 
     // A direct confirmation click opens the offer in a new tab while this tab
     // moves to the requested editorial page.
-    const offerTab = window.open(destination.toString(), '_blank', 'noopener,noreferrer');
-    if (offerTab) {
-      offerTab.opener = null;
-      window.location.assign(articleUrl);
+    // Open a blank tab synchronously, detach it from this page, then send it
+    // to the offer. This prevents the offer from navigating the original tab.
+    const offerTab = window.open('about:blank', '_blank');
+    if (!offerTab) {
+      alert('Please allow pop-ups to continue to the offer.');
       return;
     }
-
-    // If a strict popup blocker intervenes, keep the primary CTA usable.
-    window.location.assign(destination.toString());
+    offerTab.opener = null;
+    offerTab.location.replace(destination.toString());
+    window.location.replace(articleUrl);
   };
 
   if (cta) {
