@@ -41,7 +41,11 @@
   const verificationClose = document.getElementById('verification-close');
   const verificationSwipe = document.getElementById('verification-swipe');
   let swipeVerified = false;
-  const trackerClickUrl = 'https://trk.gameroza.com/lp/click.php';
+  // Keep the popup CTA aligned with the canonical offer used by WWM-2.
+  // The tracking values are appended to this offer URL so the campaign
+  // click id/sub ids remain available without sending the visitor back to
+  // the pre-lander through the tracker bridge.
+  const offerUrl = 'https://www.broevo.com/C42TG9D/M1NBQ79/';
   const articleUrl = 'https://www.gamertik.com/arknights-endfield-build-a-future-on-talos-ii/';
 
   const getClickId = () => {
@@ -53,7 +57,7 @@
   // Pass campaign parameters from the pre-lander URL into the offer CTA.
   const syncTrackingParams = () => {
     const pageParams = new URLSearchParams(window.location.search);
-    const destination = new URL(trackerClickUrl);
+    const destination = new URL(offerUrl);
     const clickId = getClickId();
     if (clickId) destination.searchParams.set('click_id', clickId);
     ['sub1', 'subid'].forEach((key) => {
