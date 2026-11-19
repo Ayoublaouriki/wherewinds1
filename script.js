@@ -37,7 +37,7 @@
 
   const cta = document.getElementById('cta');
   const verificationModal = document.getElementById('human-verification');
-  const verifyHumanButton = document.getElementById('cta-button');
+  const verifyHumanButton = document.getElementById('verify-human');
   const verificationClose = document.getElementById('verification-close');
   const verificationSwipe = document.getElementById('verification-swipe');
   let swipeVerified = false;
