@@ -1,0 +1,462 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cta-color: #00d4ff;
+  --cta-color-dark: #00a8cc;
+  --card-bg: #0d0f14;
+  --card-radius: clamp(12px, 2vw, 20px);
+  --text-white: #ffffff;
+  --text-muted: rgba(255,255,255,0.55);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #000;
+}
+
+/* ─── Background video ─────────────────────────────── */
+.bg-video-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  transform-origin: center;
+  transform: translate(-50%, -50%) scale(1.08);
+  pointer-events: none;
+  filter: blur(5px) brightness(0.55);
+}
+
+/* ─── Dark overlay ──────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: 1;
+}
+
+/* ─── Card container ────────────────────────────────── */
+.card-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: clamp(12px, 4vw, 32px);
+}
+
+/* ─── Card ──────────────────────────────────────────── */
+.card {
+  width: min(420px, 92vw);
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.07),
+    0 24px 64px rgba(0,0,0,0.8),
+    0 0 40px rgba(0,212,255,0.08);
+  animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Card video section ────────────────────────────── */
+.card-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.card-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ─── Card content ──────────────────────────────────── */
+.card-content {
+  padding: clamp(16px, 4vw, 28px) clamp(16px, 5vw, 32px) clamp(20px, 4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2.5vw, 16px);
+}
+
+.card-title {
+  color: var(--text-white);
+  font-size: clamp(1.1rem, 4.5vw, 1.45rem);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  color: var(--text-muted);
+  font-size: clamp(0.72rem, 2.5vw, 0.85rem);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* ─── CTA Button ────────────────────────────────────── */
+.cta-btn {
+  position: relative;
+  width: 100%;
+  padding: clamp(13px, 3vw, 18px) 24px;
+  background: linear-gradient(135deg, var(--cta-color), var(--cta-color-dark));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: visible;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  touch-action: manipulation;
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+
+.cta-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.cta-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: #fff;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* glow ring that pulses */
+.cta-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: transparent;
+  animation: pulseRing 1.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%   { transform: scale(1);    }
+  10%  { transform: scale(1.07); }
+  20%  { transform: scale(0.97); }
+  30%  { transform: scale(1.05); }
+  45%  { transform: scale(1);    }
+  100% { transform: scale(1);    }
+}
+
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(0,212,255,0.7),  0 0 18px rgba(0,212,255,0.3); }
+  30%  { box-shadow: 0 0 0 12px rgba(0,212,255,0), 0 0 18px rgba(0,212,255,0.3); }
+  60%  { box-shadow: 0 0 0 0 rgba(0,212,255,0.5),  0 0 18px rgba(0,212,255,0.3); }
+  80%  { box-shadow: 0 0 0 8px rgba(0,212,255,0),  0 0 18px rgba(0,212,255,0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(0,212,255,0),    0 0 18px rgba(0,212,255,0.3); }
+}
+
+.cta-btn:hover {
+  filter: brightness(1.12);
+  animation: none;
+  transform: scale(1.03);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+/* ─── Stats row ─────────────────────────────────────── */
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: clamp(0.62rem, 2vw, 0.72rem);
+  white-space: nowrap;
+}
+
+.stat-icon {
+  font-size: 0.75em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ─── Human confirmation modal ─────────────────────── */
+.verification-modal {
+  width: min(360px, calc(100vw - 32px));
+  margin: auto;
+  padding: 24px;
+  color: var(--text-white);
+  background: #0d0f14;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.8),
+    0 0 35px rgba(0,212,255,0.14);
+  text-align: center;
+}
+
+.verification-modal[open] {
+  animation: verificationIn 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.verification-modal::backdrop {
+  background: rgba(0,4,10,0.78);
+  backdrop-filter: blur(7px);
+}
+
+@keyframes verificationIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.verification-close {
+  position: absolute;
+  top: 9px;
+  right: 11px;
+  width: 32px;
+  height: 32px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.verification-close:hover,
+.verification-close:focus-visible {
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+  outline: none;
+}
+
+.verification-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 13px;
+  border: 1px solid rgba(0,212,255,0.48);
+  border-radius: 50%;
+  background: rgba(0,212,255,0.1);
+  box-shadow: 0 0 22px rgba(0,212,255,0.12);
+}
+
+.verification-icon span {
+  width: 10px;
+  height: 17px;
+  border-right: 3px solid var(--cta-color);
+  border-bottom: 3px solid var(--cta-color);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.verification-modal h2 {
+  color: var(--cta-color);
+  font-size: clamp(1.25rem, 5vw, 1.55rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.verification-modal > p:not(.verification-note) {
+  margin: 9px auto 19px;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.verification-swipe {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 64px;
+  padding: 0 14px;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9px;
+  cursor: grab;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.verification-swipe::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--swipe-progress, 0) * 100%);
+  background: linear-gradient(90deg, rgba(0,212,255,0.16), rgba(0,168,204,0.38));
+  border-radius: inherit;
+  pointer-events: none;
+  transition: width 0.12s ease;
+}
+
+.verification-swipe:hover,
+.verification-swipe:focus-visible {
+  background: rgba(255,255,255,0.065);
+  border-color: rgba(0,212,255,0.32);
+  outline: none;
+}
+
+.verification-swipe.is-dragging {
+  cursor: grabbing;
+}
+
+.verification-swipe.is-complete {
+  color: #fff;
+  border-color: rgba(0,212,255,0.65);
+  background: rgba(0,212,255,0.1);
+}
+
+.swipe-handle {
+  position: absolute;
+  /* Keep the handle (and arrow) fully inside the swipe track at rest. */
+  left: 18px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #071016;
+  background: var(--cta-color);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,168,204,0.3);
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1;
+  transform: translate(calc(-50% + var(--swipe-offset, 0px)), -50%);
+  transition: transform 0.18s ease, background 0.18s ease;
+  z-index: 2;
+}
+
+.verification-swipe.is-dragging .swipe-handle {
+  transition: none;
+}
+
+.verification-swipe.is-dragging .swipe-label {
+  opacity: 0.35;
+}
+
+.verification-swipe.is-complete .swipe-handle {
+  color: #fff;
+  background: var(--cta-color-dark);
+}
+
+.swipe-label {
+  position: relative;
+  z-index: 2;
+  margin-left: 42px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.verification-swipe.is-complete .swipe-label {
+  color: var(--cta-color);
+}
+
+.verification-swipe.is-complete .swipe-label::after {
+  content: ' ✓';
+}
+
+.verification-swipe + .verification-button {
+  margin-top: 11px;
+}
+
+.verification-button {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 13px 20px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--cta-color), var(--cta-color-dark));
+  border: 0;
+  border-radius: 9px;
+  box-shadow: 0 8px 24px rgba(0,168,204,0.23);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.verification-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.verification-button:disabled {
+  color: rgba(255,255,255,0.4);
+  background: #252a31;
+  box-shadow: none;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+}
+
+.verification-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.verification-note {
+  margin-top: 12px;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.64rem;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Very small screens ────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .card-video-wrapper { aspect-ratio: 21 / 9; }
+  .card-content { gap: 8px; padding: 12px 20px 14px; }
+  .stats { display: none; }
+  .verification-modal { padding: 18px 22px; }
+  .verification-icon { display: none; }
+}

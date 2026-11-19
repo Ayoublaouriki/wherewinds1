@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter the Untamed World of Where When Meet</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- The local video also supplies the blurred cinematic background. -->
+  <div class="bg-video-wrapper" aria-hidden="true">
+    <video class="bg-video loop-video" autoplay muted playsinline preload="auto" tabindex="-1">
+      <source src="compressed_AE_light.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Dark overlay -->
+  <div class="overlay"></div>
+
+  <!-- Card -->
+  <div class="card-container">
+    <div class="card">
+
+      <!-- Responsive local video inside the original card layout. -->
+      <div class="card-video-wrapper">
+        <video class="card-video loop-video" autoplay muted playsinline preload="auto" aria-label="Where When Meet preview">
+          <source src="compressed_AE_light.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- Card content -->
+      <div class="card-content">
+        <h1 class="card-title">Your legend begins in Where When Meet</h1>
+        <p class="card-subtitle">Watch the battle unfold, then enter a world shaped by your choices.</p>
+
+        <a class="cta-btn" id="cta" href="#">
+          <span class="cta-text">ENTER WHERE WHEN MEET</span>
+          <span class="cta-pulse"></span>
+        </a>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-icon">★</span>
+            <span>Game Preview</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-icon">👥</span>
+            <span>Open-World RPG</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- One-click confirmation shown before the existing CTA redirect flow. -->
+  <dialog
+    class="verification-modal"
+    id="human-verification"
+    aria-labelledby="verification-title"
+    aria-describedby="verification-copy"
+  >
+    <button class="verification-close" id="verification-close" type="button" aria-label="Close verification">&times;</button>
+
+    <div class="verification-icon" aria-hidden="true">
+      <span></span>
+    </div>
+
+    <h2 id="verification-title">Verify You Are Human</h2>
+    <p id="verification-copy">Please confirm that you are human to continue.</p>
+
+    <div
+      class="verification-swipe"
+      id="verification-swipe"
+      role="slider"
+      tabindex="0"
+      aria-valuemin="0"
+      aria-valuemax="1"
+      aria-valuenow="0"
+      aria-valuetext="Not verified"
+      aria-label="Swipe right to verify"
+    >
+      <span class="swipe-handle" aria-hidden="true">&rarr;</span>
+      <span class="swipe-label">Swipe right to verify</span>
+    </div>
+
+    <button class="verification-button" id="verify-human" type="button" disabled>
+      VERIFY
+    </button>
+
+    <p class="verification-note">One-click confirmation · No personal data collected</p>
+  </dialog>
+
+  <script src="script.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"f16f101884154f21bf0ee34293291a47","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
