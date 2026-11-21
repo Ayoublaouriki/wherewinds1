@@ -43,7 +43,7 @@
   let swipeVerified = false;
   // The popup CTA must go through the tracker click endpoint. The tracker
   // resolves the stored click and forwards sub1 to the configured offer.
-  const trackerClickUrl = 'https://trk.gameroza.com/lp/click.php';
+  const trackerClickUrl = 'https://trk.beyondage40.com/lp/click.php';
   const articleUrl = 'https://www.gamertik.com/arknights-endfield-build-a-future-on-talos-ii/';
 
   const getClickId = () => {
